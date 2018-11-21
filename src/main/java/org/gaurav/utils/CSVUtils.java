@@ -4,6 +4,7 @@ import org.gaurav.config.Constants;
 import org.gaurav.model.Rainfall;
 
 import java.io.*;
+import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -228,6 +229,8 @@ public class CSVUtils {
 
         List<Rainfall> rainfalls = new ArrayList<Rainfall>();
 
+        file = getResource(file);
+
         BufferedReader br = new BufferedReader(new FileReader(file));
         while((line = br.readLine()) != null){
             String[] data = line.split(separator);
@@ -330,6 +333,8 @@ public class CSVUtils {
         String line;
         boolean first = true;
 
+        file = getResource(file);
+
         List<String> headers = new ArrayList<String>();
         List<String> jsonLines = new ArrayList<String>();
 
@@ -368,12 +373,19 @@ public class CSVUtils {
     }
 
     public void writeJSONLinesToFile(List<String> jsonLines,String fileName) throws IOException {
+        fileName = getResource(fileName);
         FileWriter fileWriter = new FileWriter(fileName);
-        PrintWriter printWriter = new PrintWriter(fileWriter);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        PrintWriter printWriter = new PrintWriter(bufferedWriter);
         for (String jsonLine : jsonLines){
             printWriter.println(jsonLine);
         }
         printWriter.close();
+    }
+
+    public String getResource(String resourceName) {
+        URL location = CSVUtils.class.getProtectionDomain().getCodeSource().getLocation();
+        return location.getPath().replace("/target/classes/","/src/main/resources/" + resourceName);
     }
 
 }

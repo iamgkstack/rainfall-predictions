@@ -2,8 +2,8 @@ package org.gaurav.config;
 
 public class Constants {
 
-    public static final String csvFilePath = "/assignment-1.1/data/rainfall_india_1901-2015.csv";
-    public static final String jsonFilePath = "/assignment-1.1/data/rainfall_india_1901-2015.jsonl";
+    public static final String csvFileName = "rainfall_india_1901-2015.csv";
+    public static final String jsonFileName = "rainfall_india_1901-2015.jsonl";
     public static final String csvSeparator = ",";
     public static final String COASTAL_KARNATAKA = "COASTAL KARNATAKA";
     public static final String KARNATAKA = "KARNATAKA";

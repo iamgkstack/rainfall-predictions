@@ -1,23 +1,26 @@
 package org.gaurav;
 
+import org.gaurav.config.Constants;
 import org.gaurav.model.Rainfall;
 import org.gaurav.utils.CSVUtils;
-import org.gaurav.config.Constants;
 
 import java.io.IOException;
 import java.util.List;
 
 public class App {
 
-    public static void main( String[] args ){
+
+
+    public static void main(String[] args ){
 
         CSVUtils csvUtils = new CSVUtils();
 
         try {
-            List<String> jsonLines = csvUtils.csvToJsonLineList(Constants.csvFilePath,Constants.csvSeparator);
-            csvUtils.writeJSONLinesToFile(jsonLines,Constants.jsonFilePath);
+            List<String> jsonLines = csvUtils.csvToJsonLineList(Constants.csvFileName,Constants.csvSeparator);
 
-            List<Rainfall> rainfalls = csvUtils.populateCSVData(Constants.csvFilePath,Constants.csvSeparator);
+            csvUtils.writeJSONLinesToFile(jsonLines,Constants.jsonFileName);
+
+            List<Rainfall> rainfalls = csvUtils.populateCSVData(Constants.csvFileName,Constants.csvSeparator);
 
             Double averageRainfall = csvUtils.getAverageRainfallOfSpecificSubdivision(rainfalls,Constants.COASTAL_KARNATAKA);
             System.out.println(Constants.NEW_LINE + "Average Rainfall of " + Constants.COASTAL_KARNATAKA + " : " + averageRainfall + Constants.NEW_LINE);
